@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunnerGame", "RunnerGame\RunnerGame\RunnerGame.csproj", "{BB5314FD-DC5D-4E04-8A24-1B62D151FA81}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "RunnerGameContent", "RunnerGame\RunnerGameContent\RunnerGameContent.contentproj", "{9D454E9F-F7AD-404C-9F1D-4ABA6D9C2E7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB5314FD-DC5D-4E04-8A24-1B62D151FA81}.Debug|x86.ActiveCfg = Debug|x86
+		{BB5314FD-DC5D-4E04-8A24-1B62D151FA81}.Debug|x86.Build.0 = Debug|x86
+		{BB5314FD-DC5D-4E04-8A24-1B62D151FA81}.Release|x86.ActiveCfg = Release|x86
+		{BB5314FD-DC5D-4E04-8A24-1B62D151FA81}.Release|x86.Build.0 = Release|x86
+		{9D454E9F-F7AD-404C-9F1D-4ABA6D9C2E7B}.Debug|x86.ActiveCfg = Debug|x86
+		{9D454E9F-F7AD-404C-9F1D-4ABA6D9C2E7B}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
