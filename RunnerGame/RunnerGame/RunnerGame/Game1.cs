@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Diagnostics;
 
 namespace RunnerGame
 {
@@ -18,6 +19,10 @@ namespace RunnerGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        private Ship ship;
+        //private Obstacle wall;
+        private Generator generator;
 
         public Game1()
         {
@@ -47,6 +52,15 @@ namespace RunnerGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            Vector2 windowDimensions = new Vector2(this.GraphicsDevice.Viewport.Width,this.GraphicsDevice.Viewport.Height);
+
+            Texture2D textureShip = Content.Load<Texture2D>("ship1");
+            ship = new Ship(textureShip, 1, 1, new Vector2(50,240), windowDimensions );
+
+            Texture2D textureObstacle = Content.Load<Texture2D>("sprite2");
+            //wall = new Obstacle(textureObstacle, windowDimensions,0);
+            generator = new Generator(textureObstacle, windowDimensions);
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -71,6 +85,25 @@ namespace RunnerGame
                 this.Exit();
 
             // TODO: Add your update logic here
+            KeyboardState state = Keyboard.GetState();
+
+            //Allow user to exit game
+            if (state.IsKeyDown(Keys.Escape))
+                this.Exit();
+
+            //Move the Ship if U/D/L/R
+            if (state.IsKeyDown(Keys.Up))
+                ship.goUp();
+            if (state.IsKeyDown(Keys.Down))
+                ship.goDown();
+            if (state.IsKeyDown(Keys.Left))
+                ship.goLeft();
+            if (state.IsKeyDown(Keys.Right))
+                ship.goRight();
+
+            ship.Update();
+            //wall.Update();
+            generator.Update();
 
             base.Update(gameTime);
         }
@@ -84,6 +117,10 @@ namespace RunnerGame
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            ship.Draw(spriteBatch);
+            //wall.Draw(spriteBatch);
+            generator.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }
