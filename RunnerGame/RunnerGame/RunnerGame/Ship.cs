@@ -16,7 +16,7 @@ namespace RunnerGame
         //private int currentFrame;
         private int totalFrames;
         private Vector2 prevLocation;
-        private Vector2 location;
+        public Vector2 location;
         private Vector2 windowDimensions;
         private int speed;
        

@@ -30,7 +30,7 @@ namespace RunnerGame
             while (walls.Count() < walls.Capacity)
             {
                 int type = rand.Next(0,5);
-                Debug.WriteLine(type);
+                //Debug.WriteLine(type);
                 walls.Add(new Obstacle(texture, win,type));
             }
         }
@@ -39,7 +39,7 @@ namespace RunnerGame
         {
             //Random rand = new Random();
             int type = rand.Next(0, 5);
-            Debug.WriteLine(type);
+            //Debug.WriteLine(type);
             walls.Add(new Obstacle(texture, windowDimensions, type));
         }
 
@@ -58,6 +58,11 @@ namespace RunnerGame
             spriteBatch.Begin();
             walls[0].Draw(spriteBatch);
             spriteBatch.End();
+        }
+
+        public Rectangle getWall()
+        {
+            return new Rectangle( (int)walls[0].location.X, (int)walls[0].location.Y, walls[0].Texture.Width, walls[0].Texture.Height);
         }
     }
 }

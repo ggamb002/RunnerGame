@@ -21,8 +21,8 @@ namespace RunnerGame
         SpriteBatch spriteBatch;
 
         private Ship ship;
-        //private Obstacle wall;
         private Generator generator;
+        private Collision collider;
 
         public Game1()
         {
@@ -58,9 +58,9 @@ namespace RunnerGame
             ship = new Ship(textureShip, 1, 1, new Vector2(50,240), windowDimensions );
 
             Texture2D textureObstacle = Content.Load<Texture2D>("sprite2");
-            //wall = new Obstacle(textureObstacle, windowDimensions,0);
             generator = new Generator(textureObstacle, windowDimensions);
 
+            collider = new Collision(new Rectangle((int)ship.location.X,(int)ship.location.Y,ship.Texture.Width,ship.Texture.Height));
             // TODO: use this.Content to load your game content here
         }
 
@@ -102,8 +102,11 @@ namespace RunnerGame
                 ship.goRight();
 
             ship.Update();
-            //wall.Update();
+            collider.Update(new Vector2(ship.location.X + ship.Texture.Width, ship.location.Y));
             generator.Update();
+
+            if( collider.checkCollision(generator.getWall()))
+                Debug.WriteLine("Colliding");
 
             base.Update(gameTime);
         }
@@ -119,7 +122,6 @@ namespace RunnerGame
             // TODO: Add your drawing code here
 
             ship.Draw(spriteBatch);
-            //wall.Draw(spriteBatch);
             generator.Draw(spriteBatch);
 
             base.Draw(gameTime);

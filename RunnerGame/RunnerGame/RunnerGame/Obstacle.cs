@@ -11,7 +11,7 @@ namespace RunnerGame
     public class Obstacle
     {
         public Texture2D Texture;
-        private Vector2 location;
+        public Vector2 location;
         private Vector2 windowDimensions;
         public bool moving;
 
