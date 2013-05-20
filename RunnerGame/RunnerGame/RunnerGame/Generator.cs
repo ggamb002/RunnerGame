@@ -16,14 +16,21 @@ namespace RunnerGame
         private Random rand;
         private bool run;
 
-        public Generator(Texture2D tex,Vector2 win)
+        public Generator(Texture2D tex, Vector2 win)
         {
-            rand = new Random();
-            walls = new List<Obstacle>(10);
-            texture = tex;
+            walls            = new List<Obstacle>(10);
+            texture          = tex;
             windowDimensions = win;
+            rand             = new Random();
+            run              = true;
+            this.populate(texture, windowDimensions);
+        }
+
+        public void Initialize()
+        {
+            walls.RemoveAt(0);
+            this.newWall();
             run = true;
-            this.populate(texture,windowDimensions);
         }
 
         private void populate(Texture2D texture, Vector2 win)
@@ -31,9 +38,9 @@ namespace RunnerGame
             //Random rand = new Random();
             while (walls.Count() < walls.Capacity)
             {
-                int type = rand.Next(0,5);
+                int type = rand.Next(0, 5);
                 //Debug.WriteLine(type);
-                walls.Add(new Obstacle(texture, win,type));
+                walls.Add(new Obstacle(texture, win, type));
             }
         }
 
@@ -67,12 +74,15 @@ namespace RunnerGame
 
         public Rectangle getWall()
         {
-            return new Rectangle( (int)walls[0].location.X, (int)walls[0].location.Y, walls[0].Texture.Width, walls[0].Texture.Height);
+            return new Rectangle((int)walls[0].location.X, 
+                (int)walls[0].location.Y, 
+                walls[0].Texture.Width, 
+                walls[0].Texture.Height);
         }
 
         public void Stop()
         {
-            run = false; 
+            run = false;
         }
     }
 }

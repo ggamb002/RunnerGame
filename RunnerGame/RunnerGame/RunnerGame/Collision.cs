@@ -20,12 +20,15 @@ namespace RunnerGame
 
         public void Update(Vector2 newPos)
         {
-            topRight = newPos;
+            topRight = newPos;                                                 
         }
 
         public bool checkCollision(Rectangle obstacle)
         {
-            return (topRight.X > obstacle.X && topRight.Y < obstacle.Y + obstacle.Height && topRight.Y > obstacle.Y);
+            return (topRight.X > obstacle.X 
+                && topRight.X < obstacle.X + obstacle.Width
+                && topRight.Y < obstacle.Y + obstacle.Height 
+                && topRight.Y > obstacle.Y);
         }
 
     }

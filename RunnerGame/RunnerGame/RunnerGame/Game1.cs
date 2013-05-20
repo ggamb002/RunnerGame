@@ -23,6 +23,7 @@ namespace RunnerGame
         private Ship ship;
         private Generator generator;
         private Collision collider;
+        private bool running;
 
         public Game1()
         {
@@ -49,19 +50,27 @@ namespace RunnerGame
         /// </summary>
         protected override void LoadContent()
         {
+            // TODO: use this.Content to load your game content here
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Vector2 windowDimensions = new Vector2(this.GraphicsDevice.Viewport.Width,this.GraphicsDevice.Viewport.Height);
+            //Used to get the bounds of the screen
+            Vector2 windowDimensions = 
+                new Vector2(this.GraphicsDevice.Viewport.Width, this.GraphicsDevice.Viewport.Height);
 
+            //Create the ship
             Texture2D textureShip = Content.Load<Texture2D>("ship1");
-            ship = new Ship(textureShip, 1, 1, new Vector2(50,240), windowDimensions );
+            ship = new Ship(textureShip, 1, 1, new Vector2(50, 240), windowDimensions);
 
+            //Create the obstacles
             Texture2D textureObstacle = Content.Load<Texture2D>("sprite2");
             generator = new Generator(textureObstacle, windowDimensions);
 
-            collider = new Collision(new Rectangle((int)ship.location.X,(int)ship.location.Y,ship.Texture.Width,ship.Texture.Height));
-            // TODO: use this.Content to load your game content here
+            //Start up the large hadron collider
+            collider = new Collision( new Rectangle((int)ship.location.X, (int)ship.location.Y, 
+                    ship.Texture.Width, ship.Texture.Height));
+
+            running = true;
         }
 
         /// <summary>
@@ -114,6 +123,14 @@ namespace RunnerGame
                 Debug.WriteLine("Colliding");
                 ship.Die();
                 generator.Stop();
+                running = false;
+            }
+            
+            //Reset the game to starting state
+            if (!running && state.IsKeyDown(Keys.R))
+            {
+                ship.Initialize();
+                generator.Initialize();
             }
 
             base.Update(gameTime);

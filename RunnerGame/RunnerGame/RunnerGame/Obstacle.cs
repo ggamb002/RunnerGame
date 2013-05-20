@@ -17,10 +17,10 @@ namespace RunnerGame
 
         public Obstacle(Texture2D texture, Vector2 win, int type)
         {
-            Texture = texture;
+            Texture          = texture;
             windowDimensions = win;
-            location = setType(type);
-            moving = true;
+            location         = setType(type);
+            moving           = true;
         }
 
         private void moveLeft()
@@ -72,7 +72,9 @@ namespace RunnerGame
         public void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.Begin();
-            spriteBatch.Draw(Texture,new Rectangle((int)location.X,(int)location.Y,Texture.Width,Texture.Height),Color.White);
+            spriteBatch.Draw(Texture, 
+                new Rectangle((int)location.X, (int)location.Y, Texture.Width, Texture.Height), 
+                Color.White);
             //spriteBatch.End();
         }
     }
