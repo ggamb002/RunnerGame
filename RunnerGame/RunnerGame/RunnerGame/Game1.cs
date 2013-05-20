@@ -101,12 +101,20 @@ namespace RunnerGame
             if (state.IsKeyDown(Keys.Right))
                 ship.goRight();
 
+            //Update the ship
             ship.Update();
+            //Check for collisions 
             collider.Update(new Vector2(ship.location.X + ship.Texture.Width, ship.location.Y));
+            //Update the generator and create new obstacles if necessary
             generator.Update();
 
-            if( collider.checkCollision(generator.getWall()))
+            //If a collision has occured then kill the ship and stop the generator
+            if (collider.checkCollision(generator.getWall()))
+            {
                 Debug.WriteLine("Colliding");
+                ship.Die();
+                generator.Stop();
+            }
 
             base.Update(gameTime);
         }

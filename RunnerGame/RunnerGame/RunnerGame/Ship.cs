@@ -19,6 +19,7 @@ namespace RunnerGame
         public Vector2 location;
         private Vector2 windowDimensions;
         private int speed;
+        private bool alive;
        
         public Ship(Texture2D texture, int rows, int columns, Vector2 loc, Vector2 win )
         {
@@ -30,6 +31,7 @@ namespace RunnerGame
             location = loc;
             windowDimensions = win;
             speed = 5;
+            alive = true;
         }
        
         public void Update()
@@ -40,8 +42,11 @@ namespace RunnerGame
 
         public void goUp()
         {
-            prevLocation = location;
-            location.Y -= speed;
+            if (alive)
+            {
+                prevLocation = location;
+                location.Y -= speed;
+            }
 
             if (location.Y <= 0)
                 undoMove();
@@ -49,8 +54,11 @@ namespace RunnerGame
 
         public void goDown()
         {
-            prevLocation = location;
-            location.Y += speed;
+            if (alive)
+            {
+                prevLocation = location;
+                location.Y += speed;
+            }
 
             if (location.Y + Texture.Height >= windowDimensions.Y)
                 undoMove();
@@ -58,9 +66,11 @@ namespace RunnerGame
 
         public void goRight()
         {
-            prevLocation = location;
-            location.X += speed;
-
+            if (alive)
+            {
+                prevLocation = location;
+                location.X += speed;
+            }
             if (location.X + Texture.Width >= windowDimensions.X)
                 undoMove();
 
@@ -68,9 +78,11 @@ namespace RunnerGame
 
         public void goLeft()
         {
-            prevLocation = location;
-            location.X -= speed;
-
+            if (alive)
+            {
+                prevLocation = location;
+                location.X -= speed;
+            }
             if (location.X <= 0)
                 undoMove();
         }
@@ -86,5 +98,11 @@ namespace RunnerGame
             spriteBatch.Draw(Texture, new Rectangle((int)location.X, (int)location.Y, Texture.Width, Texture.Height), Color.White);
             spriteBatch.End();
         }
+
+        public void Die()
+        {
+            alive = false;
+        }
+
     }
 }

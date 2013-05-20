@@ -14,6 +14,7 @@ namespace RunnerGame
         private Texture2D texture;
         private Vector2 windowDimensions;
         private Random rand;
+        private bool run;
 
         public Generator(Texture2D tex,Vector2 win)
         {
@@ -21,6 +22,7 @@ namespace RunnerGame
             walls = new List<Obstacle>(10);
             texture = tex;
             windowDimensions = win;
+            run = true;
             this.populate(texture,windowDimensions);
         }
 
@@ -45,6 +47,9 @@ namespace RunnerGame
 
         public void Update()
         {
+            if (!run)
+                return;
+
             walls[0].Update();
             if (!walls[0].moving)
             {
@@ -63,6 +68,11 @@ namespace RunnerGame
         public Rectangle getWall()
         {
             return new Rectangle( (int)walls[0].location.X, (int)walls[0].location.Y, walls[0].Texture.Width, walls[0].Texture.Height);
+        }
+
+        public void Stop()
+        {
+            run = false; 
         }
     }
 }
