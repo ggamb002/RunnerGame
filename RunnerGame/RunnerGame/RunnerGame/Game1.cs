@@ -105,10 +105,10 @@ namespace RunnerGame
                 ship.goUp();
             if (state.IsKeyDown(Keys.Down))
                 ship.goDown();
-            if (state.IsKeyDown(Keys.Left))
-                ship.goLeft();
-            if (state.IsKeyDown(Keys.Right))
-                ship.goRight();
+            //if (state.IsKeyDown(Keys.Left))
+            //    ship.goLeft();
+            //if (state.IsKeyDown(Keys.Right))
+            //    ship.goRight();
 
             //Update the ship
             ship.Update();
@@ -118,13 +118,12 @@ namespace RunnerGame
             generator.Update();
 
             //If a collision has occured then kill the ship and stop the generator
-            if (collider.checkCollision(generator.getWall()))
-            {
-                Debug.WriteLine("Colliding");
-                ship.Die();
-                generator.Stop();
-                running = false;
-            }
+            //if (collider.checkCollision(generator.getWall()))
+            //{
+            //    ship.Die();
+            //    generator.Stop();
+            //    running = false;
+            //}
             
             //Reset the game to starting state
             if (!running && state.IsKeyDown(Keys.R))

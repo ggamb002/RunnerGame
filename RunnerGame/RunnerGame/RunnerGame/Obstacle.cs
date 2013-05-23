@@ -13,19 +13,26 @@ namespace RunnerGame
         public Texture2D Texture;
         public Vector2 location;
         private Vector2 windowDimensions;
+        public int movSpeed;
         public bool moving;
 
-        public Obstacle(Texture2D texture, Vector2 win, int type)
+        public Obstacle(Texture2D texture, Vector2 win, int type, int mov)
         {
             Texture          = texture;
             windowDimensions = win;
             location         = setType(type);
+            movSpeed         = mov;
             moving           = true;
         }
 
         private void moveLeft()
         {
-            location.X -= 5;
+            location.X -= movSpeed;
+        }
+
+        public void upSpeed(int inc)
+        {
+            movSpeed += inc;
         }
 
         private Vector2 setType(int type)
@@ -71,11 +78,10 @@ namespace RunnerGame
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Begin();
             spriteBatch.Draw(Texture, 
-                new Rectangle((int)location.X, (int)location.Y, Texture.Width, Texture.Height), 
+                new Rectangle((int)location.X, (int)location.Y, 
+                    (int)(Texture.Width),(int)(Texture.Height)), 
                 Color.White);
-            //spriteBatch.End();
         }
     }
 }

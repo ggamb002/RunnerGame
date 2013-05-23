@@ -15,14 +15,18 @@ namespace RunnerGame
         private Vector2 windowDimensions;
         private Random rand;
         private bool run;
+        public int numWalls;
+        private int currentSpeed;
 
         public Generator(Texture2D tex, Vector2 win)
         {
-            walls            = new List<Obstacle>(10);
+            walls            = new List<Obstacle>(5);
             texture          = tex;
             windowDimensions = win;
             rand             = new Random();
             run              = true;
+            numWalls         = 0;
+            currentSpeed     = 0;
             this.populate(texture, windowDimensions);
         }
 
@@ -35,21 +39,25 @@ namespace RunnerGame
 
         private void populate(Texture2D texture, Vector2 win)
         {
-            //Random rand = new Random();
             while (walls.Count() < walls.Capacity)
             {
                 int type = rand.Next(0, 5);
-                //Debug.WriteLine(type);
-                walls.Add(new Obstacle(texture, win, type));
+                walls.Add(new Obstacle(texture, win, type, 2));
             }
         }
 
         private void newWall()
         {
-            //Random rand = new Random();
             int type = rand.Next(0, 5);
-            //Debug.WriteLine(type);
-            walls.Add(new Obstacle(texture, windowDimensions, type));
+            if (numWalls % 5 == 0)
+            {
+                currentSpeed += (int)(currentSpeed*.2)+2;
+            }
+            Debug.WriteLine(currentSpeed);
+            walls.Add(new Obstacle(texture, 
+                        windowDimensions, 
+                        type,
+                        currentSpeed));
         }
 
         public void Update()
@@ -62,6 +70,7 @@ namespace RunnerGame
             {
                 walls.RemoveAt(0);
                 this.newWall();
+                numWalls++;
             }
         }
 
@@ -83,6 +92,9 @@ namespace RunnerGame
         public void Stop()
         {
             run = false;
+            numWalls = 0;
+            walls.Clear();
+            this.populate(texture,windowDimensions);
         }
     }
 }

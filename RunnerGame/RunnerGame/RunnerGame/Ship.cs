@@ -30,7 +30,7 @@ namespace RunnerGame
             totalFrames      = columns;
             location         = loc;
             windowDimensions = win;
-            speed            = 5;
+            speed            = 10;
             alive            = true;
         }
 
