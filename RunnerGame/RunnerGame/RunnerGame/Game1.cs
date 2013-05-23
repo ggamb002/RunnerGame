@@ -55,11 +55,11 @@ namespace RunnerGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //Used to get the bounds of the screen
-            Vector2 windowDimensions = 
+            Vector2 windowDimensions =
                 new Vector2(this.GraphicsDevice.Viewport.Width, this.GraphicsDevice.Viewport.Height);
 
             //Create the ship
-            Texture2D textureShip = Content.Load<Texture2D>("ship1");
+            Texture2D textureShip = Content.Load<Texture2D>("NMS");
             ship = new Ship(textureShip, 1, 1, new Vector2(50, 240), windowDimensions);
 
             //Create the obstacles
@@ -67,7 +67,7 @@ namespace RunnerGame
             generator = new Generator(textureObstacle, windowDimensions);
 
             //Start up the large hadron collider
-            collider = new Collision( new Rectangle((int)ship.location.X, (int)ship.location.Y, 
+            collider = new Collision(new Rectangle((int)ship.location.X, (int)ship.location.Y,
                     ship.Texture.Width, ship.Texture.Height));
 
             running = true;
@@ -113,18 +113,19 @@ namespace RunnerGame
             //Update the ship
             ship.Update();
             //Check for collisions 
-            collider.Update(new Vector2(ship.location.X + ship.Texture.Width, ship.location.Y));
+            //collider.Update(new Vector2(ship.location.X + ship.Texture.Width, ship.location.Y));
+            collider.Update(new Vector2(ship.box.X+ship.box.Width,ship.box.Y));
             //Update the generator and create new obstacles if necessary
             generator.Update();
 
             //If a collision has occured then kill the ship and stop the generator
-            //if (collider.checkCollision(generator.getWall()))
-            //{
-            //    ship.Die();
-            //    generator.Stop();
-            //    running = false;
-            //}
-            
+            if (collider.checkCollision(generator.getWall()))
+            {
+                ship.Die();
+                generator.Stop();
+                running = false;
+            }
+
             //Reset the game to starting state
             if (!running && state.IsKeyDown(Keys.R))
             {

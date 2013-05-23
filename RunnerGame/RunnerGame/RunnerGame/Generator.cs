@@ -32,8 +32,10 @@ namespace RunnerGame
 
         public void Initialize()
         {
-            walls.RemoveAt(0);
-            this.newWall();
+            //walls.RemoveAt(0);
+            //this.newWall();
+            walls.Clear();
+            this.populate(texture, windowDimensions);
             run = true;
         }
 
@@ -93,8 +95,8 @@ namespace RunnerGame
         {
             run = false;
             numWalls = 0;
-            walls.Clear();
-            this.populate(texture,windowDimensions);
+            //walls.Clear();
+            //this.populate(texture, windowDimensions);
         }
     }
 }

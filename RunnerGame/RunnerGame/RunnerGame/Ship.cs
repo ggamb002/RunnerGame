@@ -11,6 +11,7 @@ namespace RunnerGame
     public class Ship
     {
         public Texture2D Texture { get; set; }
+        public Rectangle box;
         public int Rows { get; set; }
         public int Columns { get; set; }
         //private int currentFrame;
@@ -20,6 +21,7 @@ namespace RunnerGame
         private Vector2 windowDimensions;
         private int speed;
         private bool alive;
+        private double scale;
 
         public Ship(Texture2D texture, int rows, int columns, Vector2 loc, Vector2 win)
         {
@@ -30,13 +32,18 @@ namespace RunnerGame
             totalFrames      = columns;
             location         = loc;
             windowDimensions = win;
-            speed            = 10;
+            speed            = 7;
             alive            = true;
+            scale            = .5;
+            box              = new Rectangle((int)location.X, (int)location.Y, 
+                                (int)(texture.Width * scale), 
+                                (int)(texture.Height * scale));
         }
 
         public void Initialize()
         {
             location = new Vector2(50, windowDimensions.Y / 2);
+            box.Location = new Point((int)location.X, (int)location.Y);
             alive = true;
         }
 
@@ -52,6 +59,7 @@ namespace RunnerGame
             {
                 prevLocation = location;
                 location.Y -= speed;
+                box.Location = new Point((int)location.X,(int)location.Y);
             }
 
             if (location.Y <= 0)
@@ -64,9 +72,10 @@ namespace RunnerGame
             {
                 prevLocation = location;
                 location.Y += speed;
+                box.Location = new Point((int)location.X, (int)location.Y);
             }
 
-            if (location.Y + Texture.Height >= windowDimensions.Y)
+            if (location.Y + box.Height >= windowDimensions.Y)
                 undoMove();
         }
 
@@ -101,9 +110,10 @@ namespace RunnerGame
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(Texture, 
-                new Rectangle((int)location.X, (int)location.Y, Texture.Width, Texture.Height), 
-                Color.White);
+            //spriteBatch.Draw(Texture, 
+            //    new Rectangle((int)location.X, (int)location.Y, Texture.Width, Texture.Height), 
+            //    Color.White);
+            spriteBatch.Draw(Texture,box,Color.White);
             spriteBatch.End();
         }
 
