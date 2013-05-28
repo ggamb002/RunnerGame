@@ -11,6 +11,7 @@ namespace RunnerGame
     public class Obstacle
     {
         public Texture2D Texture;
+        public Rectangle box;
         public Vector2 location;
         private Vector2 windowDimensions;
         public int movSpeed;
@@ -25,16 +26,19 @@ namespace RunnerGame
             moving           = true;
         }
 
+        //Moves the obstacle to the left at the current speed
         private void moveLeft()
         {
             location.X -= movSpeed;
         }
 
+        //Increases the speed of movement, not used
         public void upSpeed(int inc)
         {
             movSpeed += inc;
         }
 
+        //Returns
         private Vector2 setType(int type)
         {
             Vector2 loc;

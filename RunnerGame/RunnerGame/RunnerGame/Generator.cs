@@ -53,7 +53,7 @@ namespace RunnerGame
             int type = rand.Next(0, 5);
             if (numWalls % 5 == 0)
             {
-                currentSpeed += (int)(currentSpeed*.2)+2;
+                currentSpeed += 2;
             }
             Debug.WriteLine(currentSpeed);
             walls.Add(new Obstacle(texture, 

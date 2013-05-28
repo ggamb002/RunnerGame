@@ -40,19 +40,22 @@ namespace RunnerGame
                                 (int)(texture.Height * scale));
         }
 
+        //Initialize the ship to its starting position at reset
         public void Initialize()
         {
             location = new Vector2(50, windowDimensions.Y / 2);
             box.Location = new Point((int)location.X, (int)location.Y);
             alive = true;
         }
-
+        
+        //Currently does nothing, maybe something later 
         public void Update()
         {
             //Debug.WriteLine(location.X + "," + location.Y);
             //Debug.WriteLine(windowDimensions.X + "," + windowDimensions.Y);
         }
 
+        //Moves the ship up and stops at the top of the visible game window
         public void goUp()
         {
             if (alive)
@@ -66,6 +69,7 @@ namespace RunnerGame
                 undoMove();
         }
 
+        //MOves the ship down and stops at the bottom of the visible game window
         public void goDown()
         {
             if (alive)
@@ -79,6 +83,7 @@ namespace RunnerGame
                 undoMove();
         }
 
+        //Moves the ship right within bounds, should not be used
         public void goRight()
         {
             if (alive)
@@ -91,6 +96,7 @@ namespace RunnerGame
 
         }
 
+        //Moves the ship left within bounds, should not be used 
         public void goLeft()
         {
             if (alive)
@@ -102,11 +108,13 @@ namespace RunnerGame
                 undoMove();
         }
 
+        //Moves the ship back if crosses the game window bounds
         private void undoMove()
         {
             location = prevLocation;
         }
 
+        //Draws the sprite to the destRectangle member of this class
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
@@ -117,6 +125,7 @@ namespace RunnerGame
             spriteBatch.End();
         }
 
+        //Kills the ship, probably unnecessary right now, maybe does more later
         public void Die()
         {
             alive = false;
