@@ -40,7 +40,9 @@ namespace RunnerGame
                                 (int)(texture.Height * scale));
         }
 
-        //Initialize the ship to its starting position at reset
+        /// <summary>
+        /// Initialize the ship at start point
+        /// </summary>
         public void Initialize()
         {
             location = new Vector2(50, windowDimensions.Y / 2);
@@ -48,14 +50,19 @@ namespace RunnerGame
             alive = true;
         }
         
-        //Currently does nothing, maybe something later 
+        /// <summary>
+        /// Currently does nothing, maybe something later
+        /// </summary>
+ 
         public void Update()
         {
             //Debug.WriteLine(location.X + "," + location.Y);
             //Debug.WriteLine(windowDimensions.X + "," + windowDimensions.Y);
         }
 
-        //Moves the ship up and stops at the top of the visible game window
+        /// <summary>
+        /// Moves the ship up and stops at the top of the visible game window
+        /// </summary>
         public void goUp()
         {
             if (alive)
@@ -69,7 +76,9 @@ namespace RunnerGame
                 undoMove();
         }
 
-        //MOves the ship down and stops at the bottom of the visible game window
+        /// <summary>
+        /// Moves the ship down and stops at the bottom of the visible game window
+        /// </summary>
         public void goDown()
         {
             if (alive)
@@ -83,7 +92,9 @@ namespace RunnerGame
                 undoMove();
         }
 
-        //Moves the ship right within bounds, should not be used
+        /// <summary>
+        /// Moves the ship right within bounds, should not be used
+        /// </summary>
         public void goRight()
         {
             if (alive)
@@ -96,7 +107,10 @@ namespace RunnerGame
 
         }
 
-        //Moves the ship left within bounds, should not be used 
+        /// <summary>
+        /// Moves the ship left within bounds, should not be used
+        /// </summary>
+ 
         public void goLeft()
         {
             if (alive)
@@ -108,24 +122,28 @@ namespace RunnerGame
                 undoMove();
         }
 
-        //Moves the ship back if crosses the game window bounds
+        /// <summary>
+        /// Moves the ship back if crosses the game window bounds
+        /// </summary>
         private void undoMove()
         {
             location = prevLocation;
         }
 
-        //Draws the sprite to the destRectangle member of this class
+        /// <summary>
+        /// Draws the sprite to the destRectangle member of this class
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            //spriteBatch.Draw(Texture, 
-            //    new Rectangle((int)location.X, (int)location.Y, Texture.Width, Texture.Height), 
-            //    Color.White);
             spriteBatch.Draw(Texture,box,Color.White);
             spriteBatch.End();
         }
 
-        //Kills the ship, probably unnecessary right now, maybe does more later
+        /// <summary>
+        /// Kills the ship, probably unnecessary right now, maybe does more later
+        /// </summary>
         public void Die()
         {
             alive = false;

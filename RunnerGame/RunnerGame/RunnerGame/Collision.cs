@@ -10,25 +10,38 @@ namespace RunnerGame
 {
     public class Collision
     {
-        Vector2 topRight;
-        //More points for more precision
+        Rectangle player;
 
+        /// <summary>
+        /// Collision checker for player and current obstacle
+        /// </summary>
+        /// <param name="ship"></param>
         public Collision(Rectangle ship)
         {
-            topRight = new Vector2(ship.X + ship.Width, ship.Y);
+            player   = ship;
         }
 
-        public void Update(Vector2 newPos)
+        /// <summary>
+        /// Updates the position of points to check
+        /// </summary>
+        /// <param name="newPos"></param>
+        public void Update(Point loc)
         {
-            topRight = newPos;                                                 
+            player.Location = loc;                                      
         }
 
+        /// <summary>
+        /// Checks whether collision has occured
+        /// </summary>
+        /// <param name="obstacle"></param>
+        /// <returns></returns>
         public bool checkCollision(Rectangle obstacle)
         {
-            return (topRight.X > obstacle.X 
-                && topRight.X < obstacle.X + obstacle.Width
-                && topRight.Y < obstacle.Y + obstacle.Height 
-                && topRight.Y > obstacle.Y);
+            if (obstacle.Center.X - player.Center.X > 
+                obstacle.Width/2 + player.Width/2)
+                return false;
+            else
+                return player.Intersects(obstacle);
         }
 
     }

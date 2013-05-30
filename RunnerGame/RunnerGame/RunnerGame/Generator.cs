@@ -18,6 +18,11 @@ namespace RunnerGame
         public int numWalls;
         private int currentSpeed;
 
+        /// <summary>
+        /// Generates and updates a list of obstacles used in the game
+        /// </summary>
+        /// <param name="tex"></param>
+        /// <param name="win"></param>
         public Generator(Texture2D tex, Vector2 win)
         {
             walls            = new List<Obstacle>(5);
@@ -30,15 +35,21 @@ namespace RunnerGame
             this.populate(texture, windowDimensions);
         }
 
+        /// <summary>
+        /// Resets the generator to its initial state
+        /// </summary>
         public void Initialize()
         {
-            //walls.RemoveAt(0);
-            //this.newWall();
             walls.Clear();
             this.populate(texture, windowDimensions);
             run = true;
         }
 
+        /// <summary>
+        /// Populates the obstacle list with an initial amount of obstacles
+        /// </summary>
+        /// <param name="texture"></param>
+        /// <param name="win"></param>
         private void populate(Texture2D texture, Vector2 win)
         {
             while (walls.Count() < walls.Capacity)
@@ -48,6 +59,9 @@ namespace RunnerGame
             }
         }
 
+        /// <summary>
+        /// Creates a random obstacle and adds it to list
+        /// </summary>
         private void newWall()
         {
             int type = rand.Next(0, 5);
@@ -62,6 +76,9 @@ namespace RunnerGame
                         currentSpeed));
         }
 
+        /// <summary>
+        /// Checks if game is running and updates the current obstacle and list
+        /// </summary>
         public void Update()
         {
             if (!run)
@@ -76,6 +93,10 @@ namespace RunnerGame
             }
         }
 
+        /// <summary>
+        /// Draws the front of the list to the screen
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
@@ -83,20 +104,22 @@ namespace RunnerGame
             spriteBatch.End();
         }
 
+        /// <summary>
+        /// Gets the rectangle of current obstacle being used
+        /// </summary>
+        /// <returns></returns>
         public Rectangle getWall()
         {
-            return new Rectangle((int)walls[0].location.X, 
-                (int)walls[0].location.Y, 
-                walls[0].Texture.Width, 
-                walls[0].Texture.Height);
+            return walls[0].box;
         }
 
+        /// <summary>
+        /// Stops the generator from running or creating new obstacles
+        /// </summary>
         public void Stop()
         {
             run = false;
             numWalls = 0;
-            //walls.Clear();
-            //this.populate(texture, windowDimensions);
         }
     }
 }

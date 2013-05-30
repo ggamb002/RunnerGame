@@ -67,8 +67,7 @@ namespace RunnerGame
             generator = new Generator(textureObstacle, windowDimensions);
 
             //Start up the large hadron collider
-            collider = new Collision(new Rectangle((int)ship.location.X, (int)ship.location.Y,
-                    ship.Texture.Width, ship.Texture.Height));
+            collider = new Collision(ship.box);
 
             running = true;
         }
@@ -112,9 +111,10 @@ namespace RunnerGame
 
             //Update the ship
             ship.Update();
+            
             //Check for collisions 
-            //collider.Update(new Vector2(ship.location.X + ship.Texture.Width, ship.location.Y));
-            collider.Update(new Vector2(ship.box.X+ship.box.Width,ship.box.Y));
+            collider.Update(new Point((int)ship.location.X, (int)ship.location.Y));
+            
             //Update the generator and create new obstacles if necessary
             generator.Update();
 
