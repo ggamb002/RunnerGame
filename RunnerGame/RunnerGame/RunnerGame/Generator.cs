@@ -61,13 +61,14 @@ namespace RunnerGame
 
         /// <summary>
         /// Creates a random obstacle and adds it to list
+        /// Checks num of passed obstacles and speeds up if necessary
         /// </summary>
         private void newWall()
         {
             int type = rand.Next(0, 5);
             if (numWalls % 5 == 0)
             {
-                currentSpeed += 2;
+                currentSpeed += 4;
             }
             Debug.WriteLine(currentSpeed);
             walls.Add(new Obstacle(texture, 
